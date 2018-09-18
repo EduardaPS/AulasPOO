@@ -5,6 +5,12 @@ import java.util.HashMap;
 public class Email {
     private HashMap<String,String> dados = new HashMap<>();
 
+    /**
+     *
+     * @param r chave da tabela hash
+     * @param e o email a ser adcionado
+     * @return true se foi possivel adcionar
+     */
     public boolean add(String r, String e){
         String emailER = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
         if(!e.matches(emailER)){
@@ -17,12 +23,23 @@ public class Email {
         return true;
     }
     public boolean remove(String r){
+        if(dados.containsKey(r)){
+            dados.remove(r);
+            return true;
+        }
         return false;
     }
     public boolean update(String r, String e){
-        return true;
+        if(dados.containsKey(r)){
+            dados.remove(r);
+            dados.put(r,e);
+            return true;
+        }
+        return false;
     }
-    public String toString(){
-        return "";
+
+    @Override
+    public String toString() {
+        return " ";
     }
 }
