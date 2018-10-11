@@ -19,70 +19,33 @@ public class Principal {
     private JLabel p32;
     private JLabel p33;
 
-    public String trocaSimbulo(){
-        if(nomeJogadorVez.getText().equals("O")){
-            
+    public void trocaSimbulo(JLabel qual){
+        if(qual.getText().equals("")) {
+            qual.setText(nomeJogadorVez.getText());
+            nomeJogadorVez.setText((nomeJogadorVez.getText().equals("O"))? "X" : "O");
         }
-        return "oi";
     }
 
 
 
     public Principal() {
-        p11.addMouseListener(new MouseAdapter() {
+
+        MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                trocaSimbulo((JLabel)e.getSource());
             }
-        });
-        p12.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-            }
-        });
-        p13.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-            }
-        });
-        p21.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-            }
-        });
-        p22.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-            }
-        });
-        p23.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-            }
-        });
-        p31.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-            }
-        });
-        p32.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-            }
-        });
-        p33.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-            }
-        });
+        };
+        p13.addMouseListener(listener);
+        p11.addMouseListener(listener);
+        p12.addMouseListener(listener);
+        p21.addMouseListener(listener);
+        p31.addMouseListener(listener);
+        p22.addMouseListener(listener);
+        p23.addMouseListener(listener);
+        p32.addMouseListener(listener);
+        p33.addMouseListener(listener);
     }
 
     public static void main(String[] args) {
