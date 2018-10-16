@@ -1,10 +1,7 @@
 package Jogo;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.Random;
 
 public class Principal {
@@ -25,10 +22,12 @@ public class Principal {
     private JLabel ganhou;
     private JPanel jogador1;
     private JPanel jogador2;
-    private JLabel pontosJogador1;
-    private JLabel pontosJogador2;
-    private JTextField textField1;
-    private JTextField textField2;
+    private JLabel pontosJogadorO;
+    private JLabel pontosJogadorX;
+    private JTextField textFieldJogadorO;
+    private JTextField textFieldJogadorX;
+    private JLabel nomeJogadorOLabel;
+    private JLabel nomeJogadorXLabel;
 
     public void trocaSimbulo(JLabel qual){
         if(qual.getText().equals("") && qual.isEnabled()) {
@@ -98,13 +97,15 @@ public class Principal {
                     p32.setEnabled(false);
                     p33.setEnabled(false);
                     if(ganhou().equals("O")) {
-                        int pontos = Integer.parseInt(pontosJogador1.getText());
-                        pontosJogador1.setText(Integer.toString(pontos + 1));
+                        int pontos = Integer.parseInt(pontosJogadorO.getText());
+                        pontosJogadorO.setText(Integer.toString(pontos + 1));
+                        ganhou.setText(nomeJogadorOLabel.getText() + " ganhou!!!!!!!!!!!!!!!!");
                     } else if(ganhou().equals("X")){
-                        int pontos = Integer.parseInt(pontosJogador2.getText());
-                        pontosJogador2.setText(Integer.toString(pontos + 1));
+                        int pontos = Integer.parseInt(pontosJogadorX.getText());
+                        pontosJogadorX.setText(Integer.toString(pontos + 1));
+                        ganhou.setText(nomeJogadorXLabel.getText() + " ganhou!!!!!!!!!!!!!!!!");
                     }
-                    ganhou.setText(ganhou() + " ganhou!!!!!!!!!!!!!!!!");
+
                 }
             }
         };
@@ -132,13 +133,29 @@ public class Principal {
                 p32.setEnabled(true);
                 p33.setEnabled(true);
                 limpa();
-                if(pontosJogador1.getText().isEmpty()){
-                    pontosJogador1.setText("0");
-                    pontosJogador2.setText("0");
+                if(pontosJogadorO.getText().isEmpty()){
+                    pontosJogadorO.setText("0");
+                    pontosJogadorX.setText("0");
+                    textFieldJogadorO.setEnabled(false);
+                    textFieldJogadorX.setEnabled(false);
+                    nomeJogadorOLabel.setText(textFieldJogadorO.getText());
+                    nomeJogadorXLabel.setText(textFieldJogadorX.getText());
                 }
-
             }
         });
+        KeyAdapter listener1 = new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent keyEvent) {
+                super.keyReleased(keyEvent);
+                if(!textFieldJogadorO.getText().isEmpty() && !textFieldJogadorX.getText().isEmpty()){
+                    novoJogoButton.setEnabled(true);
+                } else{
+                    novoJogoButton.setEnabled(false);
+                }
+            }
+        };
+        textFieldJogadorO.addKeyListener(listener1);
+        textFieldJogadorX.addKeyListener(listener1);
     }
 
     public static void main(String[] args) {
