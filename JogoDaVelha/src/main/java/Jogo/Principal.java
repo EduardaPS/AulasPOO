@@ -81,6 +81,8 @@ public class Principal {
 
     public Principal() {
 
+        //JLabel tabela[][] = {(p11,p21,p13),(p21,p22,p23),(p31,p32,p33)};
+
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
